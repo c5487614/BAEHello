@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Base 64 Encoding</title>
+	<script type="text/javascript" src="javascript/base64.js"></script>
+	<script>
+	function encodeJS(){
+		var original = document.getElementById('tbox_original').value;
+		var encoded = base64.base64EncodeUTF8(original);
+		if(encoded.length!=0){
+			document.getElementById('tbox_encode').value = encoded;
+		}else{
+			alert('Base64编码失败');
+		}
+	}
+	function decodeJS(){
+		var encoded = document.getElementById('tbox_encode').value;
+		var original = base64.base64DecodeUTF8(encoded);
+		document.getElementById('tbox_original').value = original;
+	}
+	</script>
+</head>
+<body>
+	<div>
+		<div>original text</div>
+		<div style='float:left'>
+			<textarea id='tbox_original' style='width:500px;height:200px' ></textarea>
+		</div>
+		<div style='float:left; width:250px'>
+			<div style='float:left'>
+				<input type='button' value='Base64编码(UTF8 & JS)' onclick='encodeJS()'  />
+			</div>
+		</div>
+		<div style='clear:both'></div>
+		<div>URL encode</div>
+		<div style='float:left'>
+			<textarea id='tbox_encode'  style='width:500px;height:200px' ></textarea>
+		</div>
+		<div style='float:left; width:250px'>
+			<div style='float:left'>
+				<input type='button' value='Base64解码(UTF8 & JS)' onclick='decodeJS()'  />
+			</div>
+		</div>
+		<div style='clear:both'></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<title>encode & decode</title>
+	<link type="text/css" rel="Stylesheet" href="ext/resources/css/ext-all.css" />
+	<link type="text/css" rel="Stylesheet" href="ext/resources/css/xtheme-gray.css" />
+	<link type="text/css" rel="Stylesheet" href="ext/resources/css/examples.css" />
+
+	<script type="text/javascript" src="ext/ext-base.js"></script>
+	<script type="text/javascript" src="ext/ext-all-debug.js"></script>
+	<script type="text/javascript" src="ext/examples.js"></script>
+	<script type="text/javascript" src="javascript/base64.js"></script>
+	<script type="text/javascript">
+	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8'; 
+	function urlEncodeUTF8(){
+		var value = document.getElementById('tbox_url').value;
+		Ext.Ajax.request({
+			url : 'sp/urlencode.do',
+			params : {
+				url : value,
+				encode : 'UTF-8'
+			},
+			success : function(response,option){
+				document.getElementById('tbox_urlEncode').value = response.responseText;//json.value;
+			},
+			failure : function(){
+				alert('失败');
+			}
+			
+		});
+	}
+	function urlDecodeUTF8(){
+		var value = document.getElementById('tbox_urlEncode').value;
+		Ext.Ajax.request({
+			url : 'sp/urldecode.do',
+			params : {
+				url : value,
+				encode : 'UTF-8'
+			},
+			success : function(response,option){
+				document.getElementById('tbox_url').value = response.responseText;//json.value;
+			},
+			failure : function(){
+				alert('失败');
+			}
+			
+		});
+	}
+	function urlEncodeGB2312(){
+		var value = document.getElementById('tbox_url').value;
+		Ext.Ajax.request({
+			url : 'sp/urlencode.do',
+			params : {
+				url : value,
+				encode : 'GB2312'
+			},
+			success : function(response,option){
+				document.getElementById('tbox_urlEncode').value = response.responseText;//json.value;
+			},
+			failure : function(){
+				alert('失败');
+			}
+			
+		});
+	}
+	function urlDecodeGB2312(){
+		var value = document.getElementById('tbox_urlEncode').value;
+		Ext.Ajax.request({
+			url : 'sp/urldecode.do',
+			params : {
+				url : value,
+				encode : 'GB2312'
+			},
+			success : function(response,option){
+				document.getElementById('tbox_url').value = response.responseText;//json.value;
+			},
+			failure : function(){
+				alert('失败');
+			}
+			
+		});
+	}
+	function encodeURIJS(){
+		var value = document.getElementById('tbox_url').value;
+		document.getElementById('tbox_urlEncode').value = encodeURI(value);
+	}
+	function decodeURIJS(){
+		var value = document.getElementById('tbox_urlEncode').value;
+		document.getElementById('tbox_url').value = decodeURI(value);
+	}
+	</script>
+</head>
+
+<body>
+	<div>
+		<div>URL</div>
+		<div style='float:left'>
+			<textarea id='tbox_url' style='width:500px;height:200px' ></textarea>
+		</div>
+		<div style='float:left; width:250px'>
+			<div style='float:left'>
+				<input type='button' value='URL编码(UTF8)' onclick='urlEncodeUTF8()'  />
+				<input type='button' value='URL编码(GB2312)' onclick='urlEncodeGB2312()'  />
+			</div>
+			<div style='float:left'>
+				<input type='button' value='URL编码(JS)' onclick='encodeURIJS()'  />
+			</div>
+		</div>
+		<div style='clear:both'></div>
+		<div>URL encode</div>
+		<div style='float:left'>
+			<textarea id='tbox_urlEncode'  style='width:500px;height:200px' ></textarea>
+		</div>
+		<div style='float:left; width:250px'>
+			<div style='float:left'>
+				<input type='button' value='URL解码(UTF8)' onclick='urlDecodeUTF8()'  />
+				<input type='button' value='URL解码(GB2312)' onclick='urlDecodeGB2312()'  />
+			</div>
+			<div style='float:left'>
+				<input type='button' value='URL解码(JS)' onclick='decodeURIJS()'  />
+			</div>
+		</div>
+		<div style='clear:both'></div>
+	</div>
+</body>
+</html>

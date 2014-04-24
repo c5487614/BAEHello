@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd  
+           http://www.springframework.org/schema/aop  
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd  
+           http://www.springframework.org/schema/task 
+           http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+	<!-- 
+	<context:annotation-config />
+	<context:component-scan base-package="test" />-->
+	<bean id="applcation_bean" class="cch.busi.MyApplicationContext"></bean>
+	<bean id="objectMap" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+	
+	<task:scheduler id="myScheduler" pool-size="10"/>
+	<task:scheduled-tasks scheduler="myScheduler">
+		<task:scheduled ref="application_processor" method="test" cron="0 0/2 * * * *"/>
+	    <task:scheduled ref="task_lotteryTask" method="doTask" cron="0 30 23 * * *"/>
+	    <task:scheduled ref="task_keepOnloneTask" method="doTask" cron="0 0/10 * * * *"/>
+	</task:scheduled-tasks>
+	<bean id="application_processor" class="cch.application.ApplicationInit"></bean>
+	<bean id="task_lotteryTask" class="cch.task.LotteryTask"></bean>
+	<bean id="task_keepOnloneTask" class="cch.task.KeepOnloneTask"></bean>
+</beans>

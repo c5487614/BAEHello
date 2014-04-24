@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>proxy</title>
+	<script type="text/javascript" src="ext/ext-base.js"></script>
+    <script type="text/javascript" src="ext/ext-all-debug.js"></script>
+    <script type="text/javascript">
+    Ext.onReady(function(){
+    	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8';
+    });
+    function getContent(){
+		Ext.Ajax.request({
+			timeout : 1000 * 60,
+			url : 'sp/proxy.do',
+			params : {
+				url : document.getElementById('tbox_url').value
+			},
+			success : function(response,option){
+				document.getElementById('div_content').innerHTML = response.responseText;
+				//alert(response.responseText);
+			},
+			failure : function(){
+				alert('Ê§°Ü');
+			}
+		});
+    }
+    </script>
+</head>
+<body>
+	<div id="div_main">
+		<div>
+			<input type="text" value="" id="tbox_url"style="width:400px;" />
+			<input type="button" value="go" id="btn_go" onclick="getContent()"/>
+		</div>
+	</div>
+	<div id="div_content">
+	<div>
+</body>
+</html>
