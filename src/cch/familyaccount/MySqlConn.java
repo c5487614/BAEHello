@@ -11,8 +11,9 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
  
 public class MySqlConn<T> {
-	static String connStr = "jdbc:mysql://sqld.duapp.com:4050/eIiIjjxGVIxNJJMVEklh?user=92MilZM1hjzBQNpMTFQBzyZA&password=fDPGsgcCAWuUUUFt5LIYlGYxPDrDGOZn&characterEncoding=UTF8&connectTimeout=0";
+	//static String connStr = "jdbc:mysql://sqld.duapp.com:4050/eIiIjjxGVIxNJJMVEklh?user=92MilZM1hjzBQNpMTFQBzyZA&password=fDPGsgcCAWuUUUFt5LIYlGYxPDrDGOZn&characterEncoding=UTF8&connectTimeout=0";
 	//static String connStr = "jdbc:mysql://localhost/baetest?user=root&password=CCH&characterEncoding=UTF8";
+	static String connStr = "jdbc:mysql://localhost:3306/test?user=root&password=CCH&characterEncoding=UTF8";
 	public MySqlConn(){
 		Logger logger = Logger.getLogger("name");
 		

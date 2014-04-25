@@ -93,6 +93,72 @@
 				}
 			})
 		}
+		function cmcciLearnLogin(){
+			Ext.Ajax.request({
+				url : 'sp/cmcciLearnLogin.do',
+				params : {
+				},
+				success : function(response,option){
+					alert(response.responseText);
+				},
+				failure : function(){
+					alert('wrong!');
+				}
+			})
+		}
+		function cmccOpenClass(){
+			Ext.Ajax.request({
+				url : 'sp/cmccOpenClass.do',
+				params : {
+				},
+				success : function(response,option){
+					alert(response.responseText);
+				},
+				failure : function(){
+					alert('wrong!');
+				}
+			})
+		}
+		function cmccCloseClass(){
+			Ext.Ajax.request({
+				url : 'sp/cmccCloseClass.do',
+				params : {
+				},
+				success : function(response,option){
+					alert(response.responseText);
+				},
+				failure : function(){
+					alert('wrong!');
+				}
+			})
+		}
+		
+		function cmccLogout(){
+			Ext.Ajax.request({
+				url : 'sp/cmccLogout.do',
+				params : {
+				},
+				success : function(response,option){
+					alert(response.responseText);
+				},
+				failure : function(){
+					alert('wrong!');
+				}
+			})
+		}
+		function cmccGetUserInfo(){
+			Ext.Ajax.request({
+				url : 'sp/cmccGetUserInfo.do',
+				params : {
+				},
+				success : function(response,option){
+					alert(response.responseText);
+				},
+				failure : function(){
+					alert('wrong!');
+				}
+			})
+		}
 		</script>
 	</head>
 	<body>
@@ -145,6 +211,19 @@
 		</div>
 		<div>
 			<input type="button" value="feixin Login" onclick="feixinLogin();" />
+		</div>
+		
+		<div>
+			<hr />
+			ilearn
+		</div>
+		<div>
+			<input type="button" value="CMCC Login" onclick="cmcciLearnLogin();" />
+			<input type="button" value="CMCC UserInfo" onclick="cmccGetUserInfo();" />
+			<input type="button" value="Open Class" onclick="cmccOpenClass();" />
+			<input type="button" value="Close Class" onclick="cmccCloseClass();" />
+			
+			<input type="button" value="CMCC Logout" onclick="cmccLogout();" />
 		</div>
 		
 		<div id="div_main">

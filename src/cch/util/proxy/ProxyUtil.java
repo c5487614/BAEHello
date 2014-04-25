@@ -44,6 +44,7 @@ public class ProxyUtil {
 			for(i=0;i<b1.length;i++){
 				b1[i] = b[i];
 			}
+			input.close();
             return new String(b1,"UTF8");
 		}else if(statusCode==302){
 			for(Header h : response.getAllHeaders()){
@@ -66,6 +67,7 @@ public class ProxyUtil {
 			for(i=0;i<b1.length;i++){
 				b1[i] = b[i];
 			}
+			input.close();
             return statusCode + new String(b1,"GBK");
 		}
 		return "";

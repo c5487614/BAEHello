@@ -23,6 +23,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class HB10086Util {
 	private static HB10086Util uniqueInstance = null;
 	HttpClient httpclient = null;
@@ -103,6 +106,49 @@ public class HB10086Util {
 			logger.log(Level.INFO, e.getMessage());
 			e.printStackTrace();
 		}
+		return "";
+	}
+	public String loginCMCCiLearn(String random){
+		httpclient = new DefaultHttpClient();
+		String url = "http://cmuonline.chinamobile.com/ilearn/en/learner/jsp/hp_loginRedirect.jsp";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+		nvps.add(new BasicNameValuePair("loginType", "N"));
+		nvps.add(new BasicNameValuePair("password", "cch119215277"));
+		nvps.add(new BasicNameValuePair("siteName", "hb"));
+		nvps.add(new BasicNameValuePair("username", "35032438"));
+		nvps.add(new BasicNameValuePair("yzInput", random));
+		HttpPost httpPost = new HttpPost(url);
+		try{
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+			HttpResponse response = httpclient.execute(httpPost);
+			String retValue = this.Response2String(response);
+		}catch(Exception ex){
+			
+		}finally{}
+		return null;
+	}
+	public String getCMCCRandom(){
+		httpclient = new DefaultHttpClient();
+		String url = "http://cmuonline.chinamobile.com/ilearn/en/learner/jsp/hp_login_ajaxServer.jsp";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+		nvps.add(new BasicNameValuePair("type", "randomCode"));
+		HttpPost httpPost = new HttpPost(url);
+		try{
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+			HttpResponse response = httpclient.execute(httpPost);
+			String retValue = this.Response2String(response);
+			if(response.getStatusLine().getStatusCode()==200){
+				ObjectMapper map = new ObjectMapper();
+				JsonNode node = null;
+				node = map.readTree(retValue);
+				return node.get("code").asText();
+			}else{
+				logger.log(Level.INFO,retValue);
+			}
+			
+		}catch(Exception ex){
+			
+		}finally{}
 		return "";
 	}
 	public void notifyAction(){
@@ -211,6 +257,8 @@ public class HB10086Util {
 		value = value.substring(0, iEnd);
 		return value;
 	}
+	
+	
 	private String getCookie(HttpResponse response,String headName ,String name){
 		//headName = Set-Cookie
 		Header[] cookieHeaders = response.getHeaders(headName);
@@ -243,7 +291,7 @@ public class HB10086Util {
 			for(i=0;i<b1.length;i++){
 				b1[i] = b[i];
 			}
-			//log2File("E:\\10086.txt",b1);
+			log2File("E:\\10086.txt",b1);
             return new String(b1,"GBK");
 		}else{
 			HttpEntity entity = response.getEntity();

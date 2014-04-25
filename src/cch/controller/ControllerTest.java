@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cch.lottery.busi.LotteryBusi;
 import cch.reminder.busi.FeixinUtil;
+import cch.util.proxy.CMCCiLearn;
 import cch.util.proxy.HB10086Util;
 import cch.util.proxy.ProxyUtil;
 import cch.util.url.URLUtil;
@@ -116,4 +117,34 @@ public class ControllerTest {
 		String retValue = feixin.Login(ccpSession, random);
 		return retValue;
     }
+	@RequestMapping(value = "/cmcciLearnLogin.do",produces="application/json;charset=UTF-8")
+    public @ResponseBody String cmcciLearnLogin() throws KeyManagementException {
+		CMCCiLearn cmcciLearn = CMCCiLearn.getInstance();
+		cmcciLearn.preCMCCLogin0();
+		String retValue = cmcciLearn.preCMCCLogin();
+		retValue = retValue + ";" + cmcciLearn.preCMCCLogin1(); 
+		retValue = retValue + ";" + cmcciLearn.loginCMCCiLearn(); 
+		//cmcciLearn.getUserProfile();
+		return "{result:'"+retValue+"'}";
+    }
+	@RequestMapping(value = "/cmccGetUserInfo.do",produces="application/json;charset=UTF-8")
+    public @ResponseBody String cmccGetUserInfo() throws KeyManagementException {
+		CMCCiLearn cmcciLearn = CMCCiLearn.getInstance();
+		String retValue = cmcciLearn.getUserProfile();
+		return "{result:'"+retValue+"'}";
+    }
+	@RequestMapping(value = "/cmccOpenClass.do",produces="application/json;charset=UTF-8")
+    public @ResponseBody String cmccOpenClass() {
+		CMCCiLearn cmcciLearn = CMCCiLearn.getInstance();
+		String retValue = cmcciLearn.openClassRoom();
+		return "{result:'"+retValue+"'}";
+    }
+	
+	@RequestMapping(value = "/cmccLogout.do",produces="application/json;charset=UTF-8")
+    public @ResponseBody String cmcclogout() {
+		CMCCiLearn cmcciLearn = CMCCiLearn.getInstance();
+		String retValue = cmcciLearn.logout();
+		return "{result:'"+retValue+"'}";
+    }
+	
 }
