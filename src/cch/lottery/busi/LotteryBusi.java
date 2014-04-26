@@ -39,7 +39,7 @@ public class LotteryBusi implements ResultSetCallback<Lottery>{
 		LotteryUtil lotteryUtil = LotteryUtil.getInstance();
 		Logger logger = Logger.getLogger("name");
 		String json = lotteryUtil.getLastResult();
-		//logger.log(Level.INFO, json);
+		logger.log(Level.INFO, json);
 		ObjectMapper map = new ObjectMapper();
 		JsonNode node = null;
 		try {

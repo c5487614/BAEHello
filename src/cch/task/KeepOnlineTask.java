@@ -3,7 +3,7 @@ package cch.task;
 import cch.lottery.busi.LotteryBusi;
 import cch.util.proxy.ProxyUtil;
 
-public class KeepOnloneTask {
+public class KeepOnlineTask {
 	public void doTask(){
 		try{
 			System.out.println("KeepOnline begin");
