@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="helloBAE" basedir="." default="war">
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<mkdir dir="dist/ROOT"/>
+	</target>
+	<path id="compile.classpath"> 
+	    
+	</path>
+	<target name="compile" depends="init" > 
+	    <javac destdir="build/classes" debug="true" srcdir="src"> 
+	        <classpath refid="compile.classpath"/> 
+	    </javac> 
+	</target>
+	<target name="war" depends="compile"> 
+	    <war destfile="dist/ROOT.rar" webxml="WebRoot/WEB-INF/web.xml"> 
+	        <fileset dir="WebRoot">
+	        	<exclude name="WebRoot/WEB-INF/classes/"/>
+	    	</fileset>
+	    	
+	    </war> 
+	</target> 
+	<!--
+	<target name="war" depends="compile"> 
+	    <war destfile="dist/ROOT.rar" webxml="WebRoot/WEB-INF/web.xml"> 
+	        <fileset dir="WebRoot">
+	        	<exclude name="WebRoot/WEB-INF/classes/"/>
+	    	</fileset>
+	    	<classes dir="build/classes"/> 
+	    </war> 
+	</target> 
+	
+	<copydir todir="dist/ROOT">
+		<fileset dir="WebRoot">
+			todir="dist/ROOT/WEB-INF/classes/cch"
+		</fileset>
+	</copydir>
+	-->
+	<target name="classescopy">
+		<copy todir="dist/ROOT/WEB-INF">
+		    <fileset dir="WebRoot/WEB-INF">
+		      <exclude name=".svn/*.*"/>
+		    </fileset>
+		</copy>
+	</target>
+	<target name="clean"> 
+	    <delete dir="dist" /> 
+	    <delete dir="build" /> 
+	</target> 
+	
+</project>
