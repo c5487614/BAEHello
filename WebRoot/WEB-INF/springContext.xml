@@ -16,14 +16,14 @@
 	<context:component-scan base-package="test" />-->
 	<bean id="applcation_bean" class="cch.busi.MyApplicationContext"></bean>
 	<bean id="objectMap" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
-	<!-- -->
+	<!-- 
 	<task:scheduler id="myScheduler" pool-size="10"/>
 	<task:scheduled-tasks scheduler="myScheduler">
 		<task:scheduled ref="application_processor" method="test" cron="0 0/2 * * * *"/>
 	    <task:scheduled ref="task_lotteryTask" method="doTask" cron="0 30 23 * * *"/>
 	    <task:scheduled ref="task_keepOnlineTask" method="doTask" cron="0 0/15 * * * *"/>
 	</task:scheduled-tasks>
-	
+	-->
 	<bean id="application_processor" class="cch.application.ApplicationInit"></bean>
 	<bean id="task_lotteryTask" class="cch.task.LotteryTask"></bean>
 	<bean id="task_keepOnlineTask" class="cch.task.KeepOnlineTask"></bean>

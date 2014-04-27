@@ -30,7 +30,8 @@ public class myServlet extends HttpServlet{
 		}
 		
 		if(action.equals("getData")){
-			getTop50(resp);
+			String itemType = req.getParameter("itemType");
+			getTop50(resp,itemType);
 		}else if(action.equals("add")){
 			try {
 				if(addDailyInfo(req)){
@@ -67,12 +68,13 @@ public class myServlet extends HttpServlet{
 		this.addJsonHead(resp);
 		resp.getOutputStream().print("{success:true}");
 	}
-	private void getTop50(HttpServletResponse resp) throws JsonGenerationException, JsonMappingException, IOException{
+	private void getTop50(HttpServletResponse resp,String itemType) throws JsonGenerationException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		ActionBusi actionBusi = new ActionBusi();
 		List<DailyInfo> list = null;
 		try {
-			list = actionBusi.getTop50();
+			//modeified by ChunhuiChen 2014-04-27
+			list = actionBusi.getTop50(itemType);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,6 +93,7 @@ public class myServlet extends HttpServlet{
 		model.setFillDate(new Date());
 		model.setPCInfo(req.getRemoteAddr());
 		model.setIsPaid("0");
+		model.setItemType(req.getParameter("daily_type"));
 		ActionBusi actionBusi = new ActionBusi();
 		return actionBusi.insert(model);
 	}

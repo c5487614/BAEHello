@@ -6,7 +6,12 @@
 		<mkdir dir="dist/ROOT"/>
 	</target>
 	<path id="compile.classpath"> 
-	    
+		<fileset dir="WebRoot/WEB-INF/lib"> 
+	        <include name="*.jar"/> 
+	    </fileset> 
+		<fileset dir="D:/apache-tomcat-7.0.53/lib"> 
+	        <include name="*.jar"/> 
+	    </fileset> 
 	</path>
 	<target name="compile" depends="init" > 
 	    <javac destdir="build/classes" debug="true" srcdir="src"> 
@@ -14,7 +19,7 @@
 	    </javac> 
 	</target>
 	<target name="war" depends="compile"> 
-	    <war destfile="dist/ROOT.rar" webxml="WebRoot/WEB-INF/web.xml"> 
+	    <war destfile="E:/app_java/HelloSina/3/easyxml.war" webxml="WebRoot/WEB-INF/web.xml"> 
 	        <fileset dir="WebRoot">
 	        	<exclude name="WebRoot/WEB-INF/classes/"/>
 	    	</fileset>
