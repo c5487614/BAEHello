@@ -15,18 +15,28 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 	
 	public List<DailyInfo> getTop50(){
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
-		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate from action limit 50; ";
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType from action limit 50; ";
 		//conn.executeSQL("set character_set_connection = utf8;set character_set_connection = utf8;");
+		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
+		return list;
+	}
+	//created by Chunhui Chen 2014-04-27
+	public List<DailyInfo> getTop50(String itemType){
+		if(itemType==null||itemType.trim().equals("")){
+			return this.getTop50();
+		}
+		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType from action where itemType='"+itemType+"'  limit 50; ";
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
 	}
 	
 	public boolean insert(DailyInfo model){
-		String sql = "insert into `action` (`personName`,`itemName`,`fee`,`feeDate`,`fillDate`,`PCInfo`,`IsPaid`) values('%s','%s',%s,'%s','%s','%s','%s');";
+		String sql = "insert into `action` (`personName`,`itemName`,`fee`,`feeDate`,`fillDate`,`PCInfo`,`IsPaid`,`itemType`) values('%s','%s',%s,'%s','%s','%s','%s','%s');";
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sql = String.format(sql, model.getPersonName(),model.getItemName(),
-				model.getFee(),sdf.format(model.getFeeDate()),sdf.format(model.getFillDate()),model.getPCInfo(),model.getIsPaid());
+				model.getFee(),sdf.format(model.getFeeDate()),sdf.format(model.getFillDate()),model.getPCInfo(),model.getIsPaid(),model.getItemType());
 		//conn.executeSQL("set character_set_connection = utf8;set character_set_connection = utf8;");
 		conn.executeSQL(sql);
 		return true;
@@ -73,6 +83,7 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 				}
 				model.setPCInfo(rs.getString("pCInfo"));
 				model.setPersonName(rs.getString("personName"));
+				model.setItemType(rs.getString("itemType"));
 				list.add(model);
 			}
 		} catch (SQLException e) {

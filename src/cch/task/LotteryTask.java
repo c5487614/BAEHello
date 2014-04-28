@@ -15,7 +15,7 @@ public class LotteryTask {
 			LotteryBusi lotteryBusi = new LotteryBusi();
 			lotteryBusi.insertLastResult();
 			lotteryBusi.doPredict();
-			logger.log(Level.INFO, "Lottery begin");
+			logger.log(Level.INFO, "Lottery end");
 		}catch(Exception ex){
 			
 		}

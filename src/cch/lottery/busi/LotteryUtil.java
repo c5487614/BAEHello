@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import cch.util.proxy.HB10086Util;
 
 public class LotteryUtil {
 	private static LotteryUtil uniqueInstance = null;
@@ -35,7 +38,7 @@ public class LotteryUtil {
 			String strUrl = "http://baidu.lecai.com/lottery/ajax_get_stats_omit.php?lottery_type=50&play_type=5002";
 			HttpPost httpPost = new HttpPost(strUrl);
 			httpPost.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-		    httpPost.addHeader("Accept-Encoding", "gzip, deflate");
+		    httpPost.addHeader("Accept-Encoding", "deflate");
 		    httpPost.addHeader("Cookie", "_lhc_uuid=sp_5295bb1a57bcc4.66649889; Hm_lvt_7b762fae745de11f6aafdc5eeebd1c43=1385544478,1385603645; Hm_lvt_9b75c2b57524b5988823a3dd66ccc8ca=1385544478,1385603645; _source=5555; _source_pid=0; _srcsig=b109a5da; Hm_lpvt_9b75c2b57524b5988823a3dd66ccc8ca=1385603922; Hm_lpvt_7b762fae745de11f6aafdc5eeebd1c43=1385603921; lehecai_request_control_stats=2");
 
 		    response = httpclient.execute(httpPost);
@@ -45,11 +48,13 @@ public class LotteryUtil {
 		    int responseCode = response.getStatusLine().getStatusCode();
 		    if(responseCode == HttpURLConnection.HTTP_OK){
 		    	InputStream content = entity.getContent();
-	            BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(content,"utf-8"));
 	            String line;
 	            while((line = reader.readLine()) != null){
 	                builder.append(line);
 	            }
+//		    	HB10086Util hb10086Util = HB10086Util.getInstance();
+//		    	return hb10086Util.Response2String(response);
 		    }
 		    return builder.toString();
 		}catch(Exception e){

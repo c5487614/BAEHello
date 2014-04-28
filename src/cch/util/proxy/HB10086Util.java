@@ -275,7 +275,7 @@ public class HB10086Util {
 		}
 		return null;
 	}
-	private String Response2String(HttpResponse response) throws IllegalStateException, IOException{
+	public String Response2String(HttpResponse response) throws IllegalStateException, IOException{
 		int statusCode = response.getStatusLine().getStatusCode();
 		System.out.println(statusCode);
 		if(200==statusCode){

@@ -58,6 +58,12 @@ public class DailyInfo {
 	public void setPayDate(Date payDate) {
 		this.payDate = payDate;
 	}
+	public String getItemType() {
+		return itemType;
+	}
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
 	private String personName;
 	private String itemName;
 	private double fee;
@@ -66,4 +72,6 @@ public class DailyInfo {
 	private String PCInfo;
 	private String isPaid;
 	private Date payDate;
+	private String itemType;
+	
 }
