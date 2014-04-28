@@ -11,10 +11,11 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
  
 public class MySqlConn<T> {
-	//static String connStr = "jdbc:mysql://sqld.duapp.com:4050/eIiIjjxGVIxNJJMVEklh?user=92MilZM1hjzBQNpMTFQBzyZA&password=fDPGsgcCAWuUUUFt5LIYlGYxPDrDGOZn&characterEncoding=UTF8&connectTimeout=0";
+	//BAE
+	static String connStr = "jdbc:mysql://sqld.duapp.com:4050/eIiIjjxGVIxNJJMVEklh?user=92MilZM1hjzBQNpMTFQBzyZA&password=fDPGsgcCAWuUUUFt5LIYlGYxPDrDGOZn&characterEncoding=UTF8&connectTimeout=0";
 	//static String connStr = "jdbc:mysql://localhost/baetest?user=root&password=CCH&characterEncoding=UTF8";
 	//static String connStr = "jdbc:mysql://sqld.duapp.com:4050/KvzLWBsZjENelBbcSouN?user=AQTbqRWKpAllCqKBY5ObTczF&password=UNd9CGDOllzGYRkG9l0xXHeq28pMgAyD&characterEncoding=UTF8&connectTimeout=0";
-	static String connStr = "jdbc:mysql://localhost:3306/baetest?user=root&password=CCH&characterEncoding=UTF8";
+	//static String connStr = "jdbc:mysql://localhost:3306/baetest?user=root&password=CCH&characterEncoding=UTF8";
 	//SAE
 	//static String connStr = "jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_easyxml?user=3mlxo4mzjl&password=m21im4jhx4y42k0y2x101zkzl04504yz0x55145z&characterEncoding=UTF8";
 	public MySqlConn(){
