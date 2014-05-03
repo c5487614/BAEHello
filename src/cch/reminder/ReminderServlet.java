@@ -29,10 +29,10 @@ public class ReminderServlet extends HttpServlet{
 		Logger logger =Logger.getLogger("name");
 		String action = req.getParameter("action");
 		//------------------------test
-		if(action!=null){
-			FeixinUtil.relogin();
-			return ;
-		}
+//		if(action!=null){
+//			FeixinUtil.relogin();
+//			return ;
+//		}
 		//------------------------test
 		req.setCharacterEncoding("UTF-8");
 		logger.log(Level.INFO, "ReminderServlet,doPost");
@@ -46,7 +46,7 @@ public class ReminderServlet extends HttpServlet{
 		//msgTxt = URLEncoder.encode(msgTxt, "UTF-8");
 		//"1330441788"
 		FeixinUtil feixin = FeixinUtil.getInstance();
-		feixin.sendMSM(msgTxt, receivers);
+//		feixin.sendMSM(msgTxt, receivers);
 		//get lottery information 2013-11-28
 		LotteryBusi lotteryBusi = new LotteryBusi();
 		lotteryBusi.insertLastResult();
