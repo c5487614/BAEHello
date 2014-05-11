@@ -64,6 +64,12 @@ public class DailyInfo {
 	public void setItemType(String itemType) {
 		this.itemType = itemType;
 	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	private String personName;
 	private String itemName;
 	private double fee;
@@ -73,5 +79,6 @@ public class DailyInfo {
 	private String isPaid;
 	private Date payDate;
 	private String itemType;
+	private String comment;
 	
 }

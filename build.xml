@@ -9,21 +9,20 @@
 		<fileset dir="WebRoot/WEB-INF/lib"> 
 	        <include name="*.jar"/> 
 	    </fileset> 
-		<fileset dir="E:/apache-tomcat-7.0.42/lib"> 
+		<fileset dir="D:/apache-tomcat-7.0.53/lib"> 
 	        <include name="*.jar"/> 
 	    </fileset> 
 	</path>
 	<target name="compile" depends="init" > 
-	    <javac destdir="build/classes" debug="true" srcdir="src"> 
+	    <javac destdir="WebRoot/WEB-INF/classes" debug="true" srcdir="src"> 
 	        <classpath refid="compile.classpath"/> 
 	    </javac> 
 	</target>
 	<target name="war" depends="compile"> 
 	    <war destfile="dist/easyxml.war" webxml="WebRoot/WEB-INF/web.xml"> 
 	        <fileset dir="WebRoot">
-	        	<exclude name="WebRoot/WEB-INF/classes/"/>
+	        	
 	    	</fileset>
-	    	
 	    </war> 
 	</target> 
 	<!--

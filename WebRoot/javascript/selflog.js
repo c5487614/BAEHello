@@ -22,6 +22,8 @@ DailyPanel = function(config){
 	var familyItemStoreData = [
 		{id : '买菜',name : '买菜'},
 		{id : '超市',name : '超市'},
+		{id : '早饭',name : '早饭'},
+		{id : '中饭',name : '中饭'},
 		{id : '饮用水',name : '饮用水'},
 		{id : '水费',name : '水费'},
 		{id : '电费',name : '电费'},

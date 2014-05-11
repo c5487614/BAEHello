@@ -10,10 +10,13 @@ public class SpringTask {
 //		LotteryUtil lotteryUtil = LotteryUtil.getInstance();
 //		String result = lotteryUtil.getLastResult();
 //		System.out.println(result);
+//		
+//		LotteryBusi lotteryBusi = new LotteryBusi();
+//		String result = lotteryBusi.getMaxNumIndex();
+//		System.out.println(result);
 		
-		LotteryBusi lotteryBusi = new LotteryBusi();
-		String result = lotteryBusi.getMaxNumIndex();
-		System.out.println(result);
+		String arch = System.getProperty("sun.arch.data.model");
+		System.out.println(arch);
 	}
 
 }

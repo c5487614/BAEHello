@@ -43,6 +43,14 @@ public class myServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(action.equals("addFromMobile")){
+			try{
+				
+				addDailyInfoM(req);
+				responseSucc(resp);
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
 		}else if(action.equals("delete")){
 			if(deleteDailyInfo(req)){
 				responseSucc(resp);
@@ -82,7 +90,26 @@ public class myServlet extends HttpServlet{
 		this.addJsonHead(resp);
 		mapper.writeValue(resp.getOutputStream(), list);
 	}
-	
+	private boolean addDailyInfoM(HttpServletRequest req) throws ParseException{
+		DailyInfo model = new DailyInfo();
+		model.setPersonName(req.getParameter("daily_name"));
+		model.setItemName(req.getParameter("daily_item"));
+		model.setFee(Double.parseDouble(req.getParameter("daily_money")));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		model.setFeeDate(sdf.parse(req.getParameter("daily_feeDate")));
+		model.setFillDate(sdf.parse(req.getParameter("daily_fillDate")));
+//		model.setPCInfo(req.getParameter("daily_PCInfo"));
+		model.setPCInfo(req.getRemoteAddr());
+		model.setIsPaid(req.getParameter("daily_isPaid"));
+		model.setItemType(req.getParameter("daily_itemType"));
+		model.setComment(req.getParameter("daily_comment"));
+//		System.out.println("itemName:" + model.getItemName());
+//		System.out.println("fee:" + model.getFee());
+//		System.out.println("PersonName:" + model.getPersonName());
+//		System.out.println("Comment:" + model.getComment());
+		ActionBusi actionBusi = new ActionBusi();
+		return actionBusi.insert(model);
+	}
 	private boolean addDailyInfo(HttpServletRequest req) throws ParseException{
 		DailyInfo model = new DailyInfo();
 		model.setPersonName(req.getParameter("daily_name"));
@@ -94,6 +121,7 @@ public class myServlet extends HttpServlet{
 		model.setPCInfo(req.getRemoteAddr());
 		model.setIsPaid("0");
 		model.setItemType(req.getParameter("daily_type"));
+		model.setComment("PC");
 		ActionBusi actionBusi = new ActionBusi();
 		return actionBusi.insert(model);
 	}
