@@ -131,9 +131,11 @@ public class myServlet extends HttpServlet{
 		ActionBusi actionBusi = new ActionBusi();
 		for(String id : ids){
 			model.setId(Integer.parseInt(id));
-			actionBusi.delete(model);
+			//updated by ChunhuiChen 2014-05-12 not delete the record but set the isPaid column value to 2
+			actionBusi.updateStatus(id);
+			//actionBusi.delete(model);
 		}
-		return 	true;
+		return true;
 	}
 	private boolean updateDailyInfo(){
 		return false;

@@ -4,18 +4,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import cch.familyaccount.MySqlConn;
 import cch.familyaccount.ResultSetCallback;
 import cch.familyaccount.model.DailyInfo;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 public class ActionBusi implements ResultSetCallback<DailyInfo> {
 	
 	public List<DailyInfo> getTop50(){
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
-		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action limit 50; ";
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' limit 50; ";
 		//conn.executeSQL("set character_set_connection = utf8;set character_set_connection = utf8;");
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
@@ -26,7 +27,7 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 			return this.getTop50();
 		}
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
-		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where itemType='"+itemType+"'  limit 50; ";
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' and itemType='"+itemType+"'  limit 50; ";
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
 	}
@@ -54,6 +55,15 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 	public boolean delete(DailyInfo model){
 		String sql ="delete from `action` where id = %s";
 		sql = String.format(sql, model.getId());
+		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
+		conn.executeSQL(sql);
+		return true;
+	}
+	public boolean updateStatus(String id){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		//IsPaid = 2 means that this record is been deleted
+		String sql = "Update action set isPaid='2', PayDate='" + sdf.format(now) + "' Where id=" + id;
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
 		conn.executeSQL(sql);
 		return true;
