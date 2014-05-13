@@ -1,5 +1,5 @@
 name: easyxml
-version: 1
+version: 3
 accesskey: 3mlxo4mzjl
 cron:
     - description: cron test
