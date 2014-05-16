@@ -21,7 +21,6 @@
 	<target name="war" depends="compile"> 
 	    <war destfile="dist/easyxml.war" webxml="WebRoot/WEB-INF/web.xml"> 
 	        <fileset dir="WebRoot">
-	        	
 	    	</fileset>
 	    </war> 
 	</target> 
