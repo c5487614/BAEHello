@@ -16,7 +16,7 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 	
 	public List<DailyInfo> getTop50(){
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
-		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' limit 50; ";
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' limit 150; ";
 		//conn.executeSQL("set character_set_connection = utf8;set character_set_connection = utf8;");
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
@@ -27,7 +27,7 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 			return this.getTop50();
 		}
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
-		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' and itemType='"+itemType+"'  limit 50; ";
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' and itemType='"+itemType+"'  limit 150; ";
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
 	}
