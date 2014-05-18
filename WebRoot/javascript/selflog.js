@@ -365,10 +365,15 @@ HisPanel = function(config){
 		});
 		var calculateStore={};
 		calculateStore.data=[];
+		var sumupItem = {itemName:'小计',count:1,totalFee:0,avgFee:0};
 		Ext.each(itemIndex,function(item,index,items){
 			result[item].avgFee = result[item].totalFee / result[item].count;
 			calculateStore.data.push(result[item]);
+			sumupItem.totalFee = sumupItem.totalFee + result[item].totalFee;
 		});
+		sumupItem.avgFee = sumupItem.totalFee;
+		calculateStore.data.push(sumupItem);
+		
 		var calcPanel = new CalcPanel({data:calculateStore});
 		var winCalc = new Ext.Window({
 			title : '结果',
