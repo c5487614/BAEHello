@@ -1,8 +1,12 @@
 name: easyxml
-version: 3
+version: 4
 accesskey: 3mlxo4mzjl
 cron:
     - description: cron test
-      url: http://easyxml.sinaapp.com/reminder?receivers=1330441788&msgTxt=%E6%87%92%E8%99%AB%EF%BC%8C%E8%AF%A5%E6%89%93%E6%89%AB%E5%8D%AB%E7%94%9F%E4%BA%86
-      schedule: 00 23 * * *
-      timezone: Beijing
+          url: reminder?test.php?
+          schedule: 00 23 * * *
+          timezone: Beijing
+    - description: cron test1
+          url: reminder?test=4567
+          schedule: 05 23 * * *
+          timezone: Beijing

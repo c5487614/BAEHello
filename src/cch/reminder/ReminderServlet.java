@@ -36,16 +36,16 @@ public class ReminderServlet extends HttpServlet{
 		//------------------------test
 		req.setCharacterEncoding("UTF-8");
 		logger.log(Level.INFO, "ReminderServlet,doPost");
-		logger.log(Level.INFO, req.getCharacterEncoding());
-		logger.log(Level.INFO, req.getParameter("msgTxt"));
-		String msgTxt = req.getParameter("msgTxt");
-		String receivers = req.getParameter("receivers");
+		//logger.log(Level.INFO, req.getCharacterEncoding());
+		//logger.log(Level.INFO, req.getParameter("msgTxt"));
+		//String msgTxt = req.getParameter("msgTxt");
+		//String receivers = req.getParameter("receivers");
 		//recievers
 		//receivers
-		logger.log(Level.INFO, msgTxt);
+		//logger.log(Level.INFO, msgTxt);
 		//msgTxt = URLEncoder.encode(msgTxt, "UTF-8");
 		//"1330441788"
-		FeixinUtil feixin = FeixinUtil.getInstance();
+		//FeixinUtil feixin = FeixinUtil.getInstance();
 //		feixin.sendMSM(msgTxt, receivers);
 		//get lottery information 2013-11-28
 		LotteryBusi lotteryBusi = new LotteryBusi();

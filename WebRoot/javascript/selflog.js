@@ -377,7 +377,15 @@ HisPanel = function(config){
 		var calcPanel = new CalcPanel({data:calculateStore});
 		var winCalc = new Ext.Window({
 			title : '结果',
-			items : calcPanel,
+			items : [
+				new Ext.Button({
+					text : '导出',
+					handler : function(){
+						alert('导出');
+					}
+				}),
+				calcPanel
+			],
 			autoHeight  : true
 			//autoWidth : true
 		});
