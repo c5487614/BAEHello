@@ -380,6 +380,7 @@ HisPanel = function(config){
 			items : [
 				new Ext.Button({
 					text : '导出',
+					style : 'margin-left:5px',
 					handler : function(){
 						alert('导出');
 					}
