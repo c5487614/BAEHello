@@ -348,6 +348,7 @@ HisPanel = function(config){
 		}
 	});
 	var Calculator = function(items){
+		//{length: 5, 水费: Object, 买菜: Object, 早饭: Object, 电费: Object}
 		var result={};
 		var itemIndex=[];
 		//result.totalFee=0;
@@ -363,16 +364,28 @@ HisPanel = function(config){
 			result[item.data.itemName].totalFee += item.data.fee;
 			result[item.data.itemName].count += 1;
 		});
-		var calculateStore={};
-		calculateStore.data=[];
+		//change into list ChunhuiChen 2014-05-27
 		var sumupItem = {itemName:'小计',count:1,totalFee:0,avgFee:0};
+		var resultList = [];
 		Ext.each(itemIndex,function(item,index,items){
 			result[item].avgFee = result[item].totalFee / result[item].count;
-			calculateStore.data.push(result[item]);
+			resultList.push(result[item]);
 			sumupItem.totalFee = sumupItem.totalFee + result[item].totalFee;
 		});
-		sumupItem.avgFee = sumupItem.totalFee;
-		calculateStore.data.push(sumupItem);
+		//do bubble sort
+		var i,j;
+		for(i=0;i<resultList.length-1;i++){
+			for(j=0;j<resultList.length-1-i;j++){
+				if(resultList[j].totalFee<resultList[j+1].totalFee){
+					var temp = resultList[j];
+					resultList[j] = resultList[j+1];
+					resultList[j+1] = temp;
+				}
+			}
+		}
+		resultList.push(sumupItem);
+		var calculateStore={};
+		calculateStore.data = resultList;
 		
 		var calcPanel = new CalcPanel({data:calculateStore});
 		var winCalc = new Ext.Window({
