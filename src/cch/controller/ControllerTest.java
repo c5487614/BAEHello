@@ -2,14 +2,18 @@ package cch.controller;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cch.familyaccount.model.DailyInfoReport;
 import cch.lottery.busi.LotteryBusi;
 import cch.reminder.busi.FeixinUtil;
 import cch.util.proxy.CMCCiLearn;
@@ -136,6 +140,13 @@ public class ControllerTest {
     public @ResponseBody String cmcclogout() {
 		CMCCiLearn cmcciLearn = CMCCiLearn.getInstance();
 		String retValue = cmcciLearn.logout();
+		return "{result:'"+retValue+"'}";
+    }
+	
+	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="application/json",produces="application/json;charset=UTF-8")
+    public @ResponseBody String exportDailyData(@RequestBody List<DailyInfoReport> list) {
+		String retValue ="" + list.size();
+		System.out.println("hello world");
 		return "{result:'"+retValue+"'}";
     }
 	

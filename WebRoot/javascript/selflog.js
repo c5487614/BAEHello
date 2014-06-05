@@ -395,7 +395,21 @@ HisPanel = function(config){
 					text : '导出',
 					style : 'margin-left:5px',
 					handler : function(){
-						alert('导出');
+						console.log(Ext.Ajax.defaultPostHeader);
+						Ext.Ajax.request({
+							method : 'POST',
+							url : 'sp/exportDailyData.do',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							jsonData : resultList,
+							success : function(){
+								alert('success');
+							},
+							failure : function(){
+								alert('failed');
+							}
+						});
 					}
 				}),
 				calcPanel

@@ -20,6 +20,8 @@
 				<constructor-arg value="UTF-8" />
 				<property name="writeAcceptCharset" value="false" />
 			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
