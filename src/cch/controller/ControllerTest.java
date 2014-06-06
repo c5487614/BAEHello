@@ -143,7 +143,7 @@ public class ControllerTest {
 		return "{result:'"+retValue+"'}";
     }
 	
-	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="application/json",produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="text/javascript",produces="application/json;charset=UTF-8")
     public @ResponseBody String exportDailyData(@RequestBody List<DailyInfoReport> list) {
 		String retValue ="" + list.size();
 		System.out.println("hello world");

@@ -12,7 +12,8 @@ Ext.onReady(function(){
 		items : hisPanel,
 		renderTo : 'hisPanel'
 	});
-	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8'; 
+	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8;';
+	//Ext.lib.Ajax.defaultPostHeader = 'charset=UTF-8;'; 
 	//console.log(hisPanel.tbar11);
 	//hisPanel.tbar11.add({text:'add1'});
 	
@@ -395,12 +396,12 @@ HisPanel = function(config){
 					text : '导出',
 					style : 'margin-left:5px',
 					handler : function(){
-						console.log(Ext.Ajax.defaultPostHeader);
+						console.log(Ext.lib.Ajax.defaultPostHeader);
 						Ext.Ajax.request({
 							method : 'POST',
 							url : 'sp/exportDailyData.do',
 							headers: {
-								'Content-Type': 'application/json'
+								//'Content-Type': 'application/json'
 							},
 							jsonData : resultList,
 							success : function(){
