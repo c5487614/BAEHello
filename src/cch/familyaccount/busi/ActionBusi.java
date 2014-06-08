@@ -31,6 +31,15 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
 		return list;
 	}
+	public List<DailyInfo> getTop50(String itemType,String beginDate,String endDate){
+		
+		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' and itemType='"+itemType+"' and feeDate>='"+beginDate+"' and feeDate<='"+endDate+"' ; ";
+		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
+		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
+		System.out.println(list.size());
+		System.out.println(sql);
+		return list;
+	}
 	
 	public boolean insert(DailyInfo model){
 		String sql = "insert into `action` (`personName`,`itemName`,`fee`,`feeDate`,`fillDate`,`PCInfo`,`IsPaid`,`itemType`,`comment`) values('%s','%s',%s,'%s','%s','%s','%s','%s','%s');";

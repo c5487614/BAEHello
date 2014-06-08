@@ -9,7 +9,56 @@ Ext.onReady(function(){
 	var hisPanel = new HisPanel({});
 	var hisForm = new Ext.form.FormPanel({
 		id : 'hisForm',
-		items : hisPanel,
+		items : [
+			{
+				layout : 'column',
+				border :false,
+				items :[
+					{ 
+						layout : 'form',
+						border :false,
+						items :new Ext.form.DateField({
+							fieldLabel : '开始时间',
+							id : 'begin_date',
+							width : 130,
+							allowBlank:false,
+							altFormats: 'Y-m-d',
+							format:'Y-m-d',
+							value : new Date().getFirstDateOfMonth()
+						})
+					},
+					{ 
+						layout : 'form',
+						border :false,
+						items :new Ext.form.DateField({
+							fieldLabel : '结束时间',
+							id : 'end_date',
+							width : 130,
+							allowBlank:false,
+							altFormats: 'Y-m-d',
+							format:'Y-m-d',
+							value : new Date().getLastDateOfMonth()
+						})
+					},
+					{ 
+						layout : 'form',
+						border :false,
+						items :new Ext.Button({
+							text : '查询',
+							handler : function(){
+								hisPanel.loadAction({
+									itemType : 'normal',
+									beginDate : Ext.getCmp('begin_date').getRawValue(),
+									endDate : Ext.getCmp('end_date').getRawValue()
+								})
+							}
+						})
+					}
+					
+				]
+			},
+			hisPanel,
+		],
 		renderTo : 'hisPanel'
 	});
 	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8;';
@@ -113,7 +162,6 @@ DailyPanel = function(config){
 		buttons : [
 			new Ext.Button({text : '确定',
 				handler : function(){
-					
 					cp.set('personName',Ext.getCmp('daily_name').getValue()); //set userName
 					Ext.Ajax.request({
 						url : 'Actions.aspx?action=add',
@@ -165,6 +213,19 @@ HisPanel = function(config){
 	//console.log(toolbar1);
 	//toolbar1.add(new Ext.Toolbar.Item({text:'add'}));
 	//edit1.on('keyup',function(){alert('x');},this,{buffer:200});
+	this.loadAction = function(config){
+		console.log(config);
+		
+		myStore.load({
+			params  : {
+				itemType : config.itemType,
+				beginDate : config.beginDate,
+				endDate : config.endDate,
+				random123 : new Date().format('U')
+			}
+		});
+		
+	}
 	var sm = new Ext.grid.CheckboxSelectionModel({singleSelect:false});
 	HisPanel.superclass.constructor.call(this,{
 		title : '历史数据',
@@ -217,7 +278,11 @@ HisPanel = function(config){
 		tbar : [
 			{text:'刷新',
 				handler : function(){
-					myStore.load();
+					self.loadAction({
+						'itemType' : 'normal',
+						'beginDate' : 'test1',
+						'endDate' : 'test2',
+					})
 				}
 			},
 			{
@@ -281,11 +346,11 @@ HisPanel = function(config){
 							handler	: function(item){
 								itemType = 'investment';
 								myStore.load({
-								params : {
-									itemType : itemType,
-									random : new Date().format('U')
-								}
-							});
+									params : {
+										itemType : itemType,
+										random : new Date().format('U')
+									}
+								});
 							}
 						}
 					]
@@ -323,6 +388,7 @@ HisPanel = function(config){
 		]
 		//tbar :  toolbar1
 	});
+	var self = this;
 	this.tbar11 = toolbar1;
 	this.on({
 		'afteredit' : function(){
@@ -396,21 +462,25 @@ HisPanel = function(config){
 					text : '导出',
 					style : 'margin-left:5px',
 					handler : function(){
-						console.log(Ext.lib.Ajax.defaultPostHeader);
+						Ext.lib.Ajax.setDefaultPostHeader(false);
+						//console.log(Ext.lib.Ajax.defaultPostHeader);
 						Ext.Ajax.request({
 							method : 'POST',
 							url : 'sp/exportDailyData.do',
-							headers: {
-								//'Content-Type': 'application/json'
+							headers :{
+								'Content-Type' : 'application/json'
 							},
 							jsonData : resultList,
 							success : function(){
+								//Ext.lib.Ajax.setDefaultPostHeader(true);
 								alert('success');
 							},
 							failure : function(){
+								//Ext.lib.Ajax.setDefaultPostHeader(true);
 								alert('failed');
 							}
 						});
+						
 					}
 				}),
 				calcPanel

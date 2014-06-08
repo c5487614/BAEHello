@@ -31,7 +31,7 @@ public class myServlet extends HttpServlet{
 		
 		if(action.equals("getData")){
 			String itemType = req.getParameter("itemType");
-			getTop50(resp,itemType);
+			getTop50(resp,req);
 		}else if(action.equals("add")){
 			try {
 				if(addDailyInfo(req)){
@@ -76,13 +76,18 @@ public class myServlet extends HttpServlet{
 		this.addJsonHead(resp);
 		resp.getOutputStream().print("{success:true}");
 	}
-	private void getTop50(HttpServletResponse resp,String itemType) throws JsonGenerationException, JsonMappingException, IOException{
+	private void getTop50(HttpServletResponse resp,HttpServletRequest req) throws JsonGenerationException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		ActionBusi actionBusi = new ActionBusi();
+		String itemType = req.getParameter("itemType");
+		String beginDate = req.getParameter("beginDate");
+		String endDate = req.getParameter("endDate");
 		List<DailyInfo> list = null;
 		try {
-			//modeified by ChunhuiChen 2014-04-27
-			list = actionBusi.getTop50(itemType);
+			//modified by ChunhuiChen 2014-04-27
+			//list = actionBusi.getTop50(itemType);
+			//modified by ChunhuiChen 20141-06-07
+			list = actionBusi.getTop50(itemType,beginDate,endDate);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

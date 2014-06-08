@@ -1,5 +1,6 @@
 package cch.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cch.familyaccount.busi.ActionReport;
 import cch.familyaccount.model.DailyInfoReport;
 import cch.lottery.busi.LotteryBusi;
 import cch.reminder.busi.FeixinUtil;
@@ -143,10 +145,11 @@ public class ControllerTest {
 		return "{result:'"+retValue+"'}";
     }
 	
-	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="text/javascript",produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="application/json",produces="application/json;charset=UTF-8")
     public @ResponseBody String exportDailyData(@RequestBody List<DailyInfoReport> list) {
 		String retValue ="" + list.size();
-		System.out.println("hello world");
+		ActionReport actionReport = new ActionReport();
+//		actionReport.createReport(list);
 		return "{result:'"+retValue+"'}";
     }
 	
