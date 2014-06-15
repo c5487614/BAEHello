@@ -36,8 +36,6 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 		String sql = "select id,personName,itemName,fee,feeDate,fillDate,PCInfo,isPaid,payDate,itemType,comment from action where isPaid = '0' and itemType='"+itemType+"' and feeDate>='"+beginDate+"' and feeDate<='"+endDate+"' ; ";
 		MySqlConn<DailyInfo> conn = new MySqlConn<DailyInfo>();
 		List<DailyInfo> list = conn.ExecuteSQL(sql, this);
-		System.out.println(list.size());
-		System.out.println(sql);
 		return list;
 	}
 	

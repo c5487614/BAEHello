@@ -57,15 +57,11 @@ Ext.onReady(function(){
 					
 				]
 			},
-			hisPanel,
+			hisPanel
 		],
 		renderTo : 'hisPanel'
 	});
 	Ext.lib.Ajax.defaultPostHeader = Ext.lib.Ajax.defaultPostHeader + '; charset=UTF-8;';
-	//Ext.lib.Ajax.defaultPostHeader = 'charset=UTF-8;'; 
-	//console.log(hisPanel.tbar11);
-	//hisPanel.tbar11.add({text:'add1'});
-	
 });
 
 DailyPanel = function(config){
@@ -214,8 +210,6 @@ HisPanel = function(config){
 	//toolbar1.add(new Ext.Toolbar.Item({text:'add'}));
 	//edit1.on('keyup',function(){alert('x');},this,{buffer:200});
 	this.loadAction = function(config){
-		console.log(config);
-		
 		myStore.load({
 			params  : {
 				itemType : config.itemType,
@@ -279,10 +273,10 @@ HisPanel = function(config){
 			{text:'刷新',
 				handler : function(){
 					self.loadAction({
-						'itemType' : 'normal',
-						'beginDate' : 'test1',
-						'endDate' : 'test2',
-					})
+						itemType : itemType,
+						beginDate : Ext.getCmp('begin_date').getRawValue(),
+						endDate : Ext.getCmp('end_date').getRawValue()
+					});
 				}
 			},
 			{
@@ -323,33 +317,30 @@ HisPanel = function(config){
 				iconCls: 'blist',
 				handler : function(btn){
 					itemType = 'normal';
-					myStore.load({
-						params : {
-							itemType : itemType,
-							random : new Date().format('U')
-						}
+					self.loadAction({
+						itemType : itemType,
+						beginDate : Ext.getCmp('begin_date').getRawValue(),
+						endDate : Ext.getCmp('end_date').getRawValue()
 					});
 				},
 				menu : {
 					items : [
 						{text : 'normal',handler : function(item){
 							itemType = 'normal';
-							myStore.load({
-								params : {
-									itemType : itemType,
-									random : new Date().format('U')
-								}
+							self.loadAction({
+								itemType : itemType,
+								beginDate : Ext.getCmp('begin_date').getRawValue(),
+								endDate : Ext.getCmp('end_date').getRawValue()
 							});
 						}},
 						{
 							text : 'investment',
 							handler	: function(item){
 								itemType = 'investment';
-								myStore.load({
-									params : {
-										itemType : itemType,
-										random : new Date().format('U')
-									}
+								self.loadAction({
+									itemType : itemType,
+									beginDate : Ext.getCmp('begin_date').getRawValue(),
+									endDate : Ext.getCmp('end_date').getRawValue()
 								});
 							}
 						}
@@ -462,25 +453,30 @@ HisPanel = function(config){
 					text : '导出',
 					style : 'margin-left:5px',
 					handler : function(){
-						Ext.lib.Ajax.setDefaultPostHeader(false);
-						//console.log(Ext.lib.Ajax.defaultPostHeader);
-						Ext.Ajax.request({
-							method : 'POST',
-							url : 'sp/exportDailyData.do',
-							headers :{
-								'Content-Type' : 'application/json'
-							},
-							jsonData : resultList,
-							success : function(){
-								//Ext.lib.Ajax.setDefaultPostHeader(true);
-								alert('success');
-							},
-							failure : function(){
-								//Ext.lib.Ajax.setDefaultPostHeader(true);
-								alert('failed');
-							}
-						});
-						
+						var a = document.getElementById('download_iframe');
+						var b = a.contentWindow.document.getElementById("downloadForm");
+						var c = a.contentWindow.document.getElementById("exportData");
+						c.value='{ "data" :' +  Ext.encode(resultList) + '}';
+						b.submit();
+//						Ext.lib.Ajax.setDefaultPostHeader(false);
+//						//console.log(Ext.lib.Ajax.defaultPostHeader);
+//						Ext.Ajax.request({
+//							method : 'POST',
+//							url : 'sp/exportDailyData.do',
+//							headers :{
+//								'Content-Type' : 'application/json'
+//							},
+//							jsonData : resultList,
+//							success : function(){
+//								//Ext.lib.Ajax.setDefaultPostHeader(true);
+//								alert('success');
+//							},
+//							failure : function(){
+//								//Ext.lib.Ajax.setDefaultPostHeader(true);
+//								alert('failed');
+//							}
+//						});
+//						
 					}
 				}),
 				calcPanel

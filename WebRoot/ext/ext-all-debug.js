@@ -13932,7 +13932,7 @@ Ext.Container = Ext.extend(Ext.BoxComponent, {
         return c;
     },
 
-        onBeforeAdd : function(item){
+    onBeforeAdd : function(item){
         if(item.ownerCt){
             item.ownerCt.remove(item, false);
         }
@@ -13966,10 +13966,11 @@ Ext.Container = Ext.extend(Ext.BoxComponent, {
         return this.items.get(comp);
     },
 
-        lookupComponent : function(comp){
+    lookupComponent : function(comp){
+		//console.log(comp);
         if(typeof comp == 'string'){
             return Ext.ComponentMgr.get(comp);
-        }else if(!comp.events){
+        }else if(comp&&!comp.events){
             return this.createComponent(comp);
         }
         return comp;

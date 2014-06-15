@@ -1,19 +1,23 @@
 package cch.controller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.KeyManagementException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.client.ClientProtocolException;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cch.busi.MyApplicationContext;
 import cch.familyaccount.busi.ActionReport;
 import cch.familyaccount.model.DailyInfoReport;
 import cch.lottery.busi.LotteryBusi;
@@ -22,6 +26,10 @@ import cch.util.proxy.CMCCiLearn;
 import cch.util.proxy.HB10086Util;
 import cch.util.proxy.ProxyUtil;
 import cch.util.url.URLUtil;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/sp")
@@ -145,12 +153,23 @@ public class ControllerTest {
 		return "{result:'"+retValue+"'}";
     }
 	
-	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST,consumes="application/json",produces="application/json;charset=UTF-8")
-    public @ResponseBody String exportDailyData(@RequestBody List<DailyInfoReport> list) {
-		String retValue ="" + list.size();
+	@RequestMapping(value = "/exportDailyData.do",method=RequestMethod.POST)
+    public void exportDailyData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String json = request.getParameter("exportData");
+		ObjectMapper om = (ObjectMapper) MyApplicationContext.getContext().getBean("objectMap");
+		JsonNode jsonTree = om.readTree(json);
+		JsonNode node = jsonTree.findValue("data");
+		List<DailyInfoReport> list = om.readValue(""+node, new TypeReference<List<DailyInfoReport>>(){});
 		ActionReport actionReport = new ActionReport();
-//		actionReport.createReport(list);
-		return "{result:'"+retValue+"'}";
+		XSSFWorkbook wb = actionReport.createReport(list);
+		response.setContentType("appliction/octet-stream");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment; filename=\"action.xlsx\"");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		//response.setContentLength()
+		//return "{result:'"+retValue+"'}";
+		//response.getOutputStream().write(json.getBytes());
     }
 	
 }
