@@ -37,9 +37,13 @@ public class LotteryUtil {
 		try{
 			String strUrl = "http://baidu.lecai.com/lottery/ajax_get_stats_omit.php?lottery_type=50&play_type=5002";
 			HttpPost httpPost = new HttpPost(strUrl);
+			httpPost.addHeader("Host", "baidu.lecai.com");
+			httpPost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0");
 			httpPost.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
 		    httpPost.addHeader("Accept-Encoding", "deflate");
-		    httpPost.addHeader("Cookie", "_lhc_uuid=sp_5295bb1a57bcc4.66649889; Hm_lvt_7b762fae745de11f6aafdc5eeebd1c43=1385544478,1385603645; Hm_lvt_9b75c2b57524b5988823a3dd66ccc8ca=1385544478,1385603645; _source=5555; _source_pid=0; _srcsig=b109a5da; Hm_lpvt_9b75c2b57524b5988823a3dd66ccc8ca=1385603922; Hm_lpvt_7b762fae745de11f6aafdc5eeebd1c43=1385603921; lehecai_request_control_stats=2");
+		    httpPost.addHeader("Referer", "http://baidu.lecai.com/lottery/ssq/");
+		    httpPost.addHeader("deflate", "deflate");
+		    httpPost.addHeader("Cookie", "_adwc=110406678%23http%253A%252F%252Fbaidu.lecai.com%252Flottery%252Fssq%252F; _adwp=110406678.6895533860.1402989814.1402989814.1402991875.2; _adwt=1402991875; _adwlh=110406678%23http%253A%252F%252Fbaidu.lecai.com%252Flottery%252Fssq%252F; _adwtc=t; _adwr=110406678%23directinto; _lhc_uuid=sp_539fecf73098e3.23734118; Hm_lvt_6c5523f20c6865769d31a32a219a6766=1402989818; Hm_lpvt_6c5523f20c6865769d31a32a219a6766=1402991875; Hm_lvt_9b75c2b57524b5988823a3dd66ccc8ca=1402989818; Hm_lpvt_9b75c2b57524b5988823a3dd66ccc8ca=1402991875; _adwb=110406678; lehecai_request_control_stats=2");
 
 		    response = httpclient.execute(httpPost);
 		    System.out.println(response.getStatusLine());
