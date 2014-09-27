@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -114,6 +115,12 @@ public class myServlet extends HttpServlet{
 //		System.out.println("Comment:" + model.getComment());
 		ActionBusi actionBusi = new ActionBusi();
 		return actionBusi.insert(model);
+	}
+	//this function is used for add a list of daily info into the server database, added by Chunhui Chen 2014-09-27
+	private boolean addDailyInfoMBash(HttpServletRequest req) throws IOException{
+		ServletInputStream sis = req.getInputStream();
+//		sis.read(b, off, len)
+		return false;
 	}
 	private boolean addDailyInfo(HttpServletRequest req) throws ParseException{
 		DailyInfo model = new DailyInfo();

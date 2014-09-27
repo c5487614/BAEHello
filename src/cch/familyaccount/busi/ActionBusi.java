@@ -47,6 +47,7 @@ public class ActionBusi implements ResultSetCallback<DailyInfo> {
 				model.getFee(),sdf.format(model.getFeeDate()),sdf.format(model.getFillDate()),model.getPCInfo(),
 				model.getIsPaid(),model.getItemType(),model.getComment());
 		//conn.executeSQL("set character_set_connection = utf8;set character_set_connection = utf8;");
+		//System.out.println(sql);
 		conn.executeSQL(sql);
 		return true;
 	}

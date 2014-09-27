@@ -512,7 +512,8 @@ CalcPanel = function(config){
 			}
 		]),
 		store : calcStore,
-		width : 420
+		width : 420,
+		height : 400
 	})
 	return this;
 }
