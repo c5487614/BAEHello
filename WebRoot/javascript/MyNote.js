@@ -18,6 +18,7 @@ var regionList = [
 	{text : 'windows',value : 'windows'},
 	{text : 'work',value : 'work'},
 	{text : 'server',value : 'server'},
+	{text : 'linux',value : 'linux'},
 	{text : 'other',value : 'other'}
 ];
 function regionInit(arrayConfig,containerId){
