@@ -14,7 +14,7 @@ public class MySqlConn<T> {
 	//BAE
 	//static String connStr = "jdbc:mysql://sqld.duapp.com:4050/eIiIjjxGVIxNJJMVEklh?user=92MilZM1hjzBQNpMTFQBzyZA&password=fDPGsgcCAWuUUUFt5LIYlGYxPDrDGOZn&characterEncoding=UTF8&connectTimeout=0";
 	//home
-	static String connStr = "jdbc:mysql://localhost/easyxml?user=root&password=CCH&characterEncoding=UTF8";
+	static String connStr = "jdbc:mysql://localhost:3306/easyxml?user=root&password=CCH&characterEncoding=UTF8";
 	//static String connStr = "jdbc:mysql://sqld.duapp.com:4050/KvzLWBsZjENelBbcSouN?user=AQTbqRWKpAllCqKBY5ObTczF&password=UNd9CGDOllzGYRkG9l0xXHeq28pMgAyD&characterEncoding=UTF8&connectTimeout=0";
 	//work
 	//static String connStr = "jdbc:mysql://localhost:3306/test?user=root&password=CCH&characterEncoding=UTF8";

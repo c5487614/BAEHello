@@ -109,10 +109,10 @@ public class myServlet extends HttpServlet{
 		model.setIsPaid(req.getParameter("daily_isPaid"));
 		model.setItemType(req.getParameter("daily_itemType"));
 		model.setComment(req.getParameter("daily_comment"));
-//		System.out.println("itemName:" + model.getItemName());
-//		System.out.println("fee:" + model.getFee());
-//		System.out.println("PersonName:" + model.getPersonName());
-//		System.out.println("Comment:" + model.getComment());
+		System.out.println("itemName:" + model.getItemName());
+		System.out.println("fee:" + model.getFee());
+		System.out.println("PersonName:" + model.getPersonName());
+		System.out.println("Comment:" + model.getComment());
 		ActionBusi actionBusi = new ActionBusi();
 		return actionBusi.insert(model);
 	}
